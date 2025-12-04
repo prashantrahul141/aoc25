@@ -1,5 +1,7 @@
 mod _01;
 mod _02;
+mod _03;
+mod _04;
 
 use std::{env, ops::Index, process::exit};
 
@@ -23,6 +25,8 @@ fn dispatch(day: i32) {
     match day {
         1 => _01::run(),
         2 => _02::run(),
+        3 => _03::run(),
+        4 => _04::run(),
         _ => {
             eprintln!("unknown day")
         }
