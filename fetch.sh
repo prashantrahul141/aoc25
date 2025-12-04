@@ -16,7 +16,7 @@ fetch () {
     -s --fail-with-body --cookie "session=$AOC_SESSION"            \
     -o "${TMPFILE}"
 
-  day_folder=$(printf "_%02d" ${1})
+  day_folder=$(printf "_%02d" "${1}")
   mkdir -p "$INPUT_DIR/${day_folder}"
   mv "$TMPFILE" "$INPUT_DIR/${day_folder}/input"
   echo "Fetched Day $1"
