@@ -3,10 +3,10 @@ mod _02;
 mod _03;
 mod _04;
 
-use std::{env, ops::Index, process::exit};
+use std::{env, process::exit};
 
 fn usage() {
-    println!("Usage:\n\t{{day}}")
+    println!("Usage:\n\t{{day}} | all")
 }
 
 fn main() {
@@ -17,11 +17,18 @@ fn main() {
         exit(-1);
     }
 
-    let day = args.index(1).parse::<i32>().expect("Failed to parse day");
+    if args[1] == "all" {
+        _ = (1..=5).map(|x| dispatch(x)).collect::<Vec<_>>();
+        exit(0);
+    }
+
+    let day = args[1].parse::<i32>().expect("Failed to parse day");
     dispatch(day);
+    exit(0);
 }
 
 fn dispatch(day: i32) {
+    println!(" Day {:02}\n--------", day);
     match day {
         1 => _01::run(),
         2 => _02::run(),
@@ -31,4 +38,5 @@ fn dispatch(day: i32) {
             eprintln!("unknown day")
         }
     };
+    println!();
 }
