@@ -3,6 +3,7 @@ mod _02;
 mod _03;
 mod _04;
 mod _05;
+mod _06;
 
 use std::{env, process::exit};
 
@@ -19,7 +20,7 @@ fn main() {
     }
 
     if args[1] == "all" {
-        _ = (1..=5).map(|x| dispatch(x)).collect::<Vec<_>>();
+        _ = (1..=6).map(|x| dispatch(x)).collect::<Vec<_>>();
         exit(0);
     }
 
@@ -36,6 +37,7 @@ fn dispatch(day: i32) {
         3 => _03::run(),
         4 => _04::run(),
         5 => _05::run(),
+        6 => _06::run(),
         _ => {
             eprintln!("unknown day")
         }
