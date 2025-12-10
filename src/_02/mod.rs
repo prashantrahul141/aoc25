@@ -25,39 +25,31 @@ fn valid_part_a(i: i64) -> bool {
 }
 
 fn valid_part_b(inp: i64) -> bool {
-    fn split_n_parts(parent: &String, n: usize) -> Vec<String> {
-        let str_len = parent.len();
-        // str cannot be divided into n parts
-        if str_len % n != 0 {
-            return Vec::new();
-        }
-        parent
-            .chars()
-            .collect::<Vec<_>>()
-            .chunks(str_len / n)
-            .map(|sub| sub.iter().collect::<String>())
-            .collect::<Vec<_>>()
-    }
+    let s = inp.to_string();
+    let len = s.len();
 
-    fn vec_all_same<T: Eq + Debug>(vec: Vec<T>) -> bool {
-        if vec.is_empty() || vec.len() == 1 {
+    for parts in 2..=len {
+        if len % parts != 0 {
+            continue;
+        }
+
+        let chunk = len / parts;
+        let first = &s[0..chunk];
+        let mut same = true;
+
+        for i in 1..parts {
+            if &s[i * chunk..(i + 1) * chunk] != first {
+                same = false;
+                break;
+            }
+        }
+
+        if same {
             return false;
         }
-
-        let first = &vec[0];
-        vec.iter().all(|n| n == first)
     }
 
-    let i_str = inp.to_string();
-    let mut result = true;
-    for i in 2..=i_str.len() {
-        if vec_all_same(split_n_parts(&i_str, i)) {
-            result = false;
-            break;
-        }
-    }
-
-    result
+    true
 }
 
 fn compute<I, F>(i: I, valid_fn: F) -> i64
