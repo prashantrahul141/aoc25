@@ -1,4 +1,4 @@
-type Battery = u64;
+type Battery = u8;
 type Bank = Vec<Battery>;
 
 fn parse(i: &'static str) -> Vec<Bank> {
